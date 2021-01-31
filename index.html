@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <heead>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;">
+    <title>Websocket Application</title>
+    <style type="text/css">
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Times New Roman', serif;
+      }
+
+      h1 {
+        color: #135F4E;
+        text-align: center;
+        background-color: #DFF1ED;
+      }
+
+      #container {
+        margin: 40px;
+        background-color: #3D907F;
+        color: #FFFFFF;
+      }
+
+      #container #content {
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+    </style>
+  </heead>
+
+  <body>
+    <h1>Websocket Application</h1>
+
+    <div id="container">
+      Data received:
+
+      <br/>
+
+      <div id="content"></div>
+    </div>
+
+    <script type="text/javascript">
+      const ws = new WebSocket('ws://localhost:8082');
+
+      ws.addEventListener("open", () => {
+        console.log("We are connected!");
+
+        ws.send("Hello, world!");
+      });
+
+      ws.addEventListener("message", (event) => {
+        console.log(event.data);
+
+        document.getElementById("content").innerHTML = event.data;
+      })
+    </script>
+  </body>
+</html>
